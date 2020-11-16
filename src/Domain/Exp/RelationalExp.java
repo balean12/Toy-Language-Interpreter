@@ -38,7 +38,7 @@ public class RelationalExp implements Exp{
             }
             else throw new EvaluationException("Second operand is not an integer! \n");
         }
-        else throw  new EvaluationException("First operand is not an integer! \n") ;
+        else throw  new EvaluationException("First operand is not an integer!! \n") ;
     return null;
     }
 
