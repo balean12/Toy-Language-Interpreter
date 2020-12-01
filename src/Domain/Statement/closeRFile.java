@@ -19,7 +19,7 @@ public class closeRFile implements IStmt{
     @Override
     public PrgState execute(PrgState state) throws MyException {
         IDictionary<String, Value> symbolTable = state.getSymTable();
-        Value value = expression.eval(symbolTable);
+        Value value = expression.eval(symbolTable, state.getHeap());
         if(!value.getType().equals(new StringType())){
             throw new StatementException("Types do not match! \n");
         }
@@ -31,7 +31,7 @@ public class closeRFile implements IStmt{
         catch (IOException exp){
             throw new StatementException("Could not open file! \n");
         }
-        return state;
+        return null;
     }
 
     @Override

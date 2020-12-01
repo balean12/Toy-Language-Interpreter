@@ -28,7 +28,7 @@ public class AssignStmt implements IStmt {
         IDictionary<String, Value> symTbl = state.getSymTable();
 
         if(symTbl.isDefined(id)){
-            Value val = expression.eval(symTbl);
+            Value val = expression.eval(symTbl, state.getHeap());
             Type typeId = (symTbl.lookup(id)).getType();
             if((val.getType()).equals(typeId))
                 symTbl.update(id,val);
@@ -36,7 +36,7 @@ public class AssignStmt implements IStmt {
                  id + "and type of the assigned expression do not match.");
         }
         else throw new StatementException("the used variable "+ id+ " was not declared before");
-        return state;
+        return null;
     }
     public IStmt deepCopy() { return new AssignStmt(this.id, this.expression.deepCopy());}
 

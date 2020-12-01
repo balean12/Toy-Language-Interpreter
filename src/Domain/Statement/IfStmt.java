@@ -19,7 +19,7 @@ public class IfStmt implements IStmt {
 
     public IfStmt(Exp e, IStmt then, IStmt els) {expression = e; thenStatement = then; elseStatement = els;}
     public PrgState execute(PrgState state) throws MyException {
-    Value expressionValue = this.expression.eval(state.getSymTable());
+    Value expressionValue = this.expression.eval(state.getSymTable(), state.getHeap());
     if(!expressionValue.getType().equals(new BoolType())) throw new StatementException("Conditional expression is not a boolean");
         else {
         IStack<IStmt> exeStack = state.getStack();
@@ -28,7 +28,7 @@ public class IfStmt implements IStmt {
         if(condition) exeStack.push(thenStatement);
         else exeStack.push(elseStatement);
     }
-        return state;
+        return null;
     }
     public String toString() {return "(IF(" + expression.toString()+ ") THEN("
             + thenStatement.toString() + ")ELSE(" + elseStatement.toString()+"))";}

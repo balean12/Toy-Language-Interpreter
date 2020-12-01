@@ -18,9 +18,9 @@ public class RunExample extends Command{
     @Override
     public void execute() {
         try {
-            controller.allStep();
+            controller.allSteps();
         }
-        catch (IOException | MyException exception){
+        catch (MyException exception){
             System.out.println(exception.getMessage());
         }
     }

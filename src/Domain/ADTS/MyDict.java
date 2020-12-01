@@ -4,9 +4,10 @@ import Domain.Exception.ADTException;
 import Domain.Exception.MyException;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MyDict<T1,T2> implements IDictionary<T1,T2> {
-    private final HashMap<T1,T2> dictionary;
+    private HashMap<T1,T2> dictionary;
     public MyDict(){
         dictionary = new HashMap<T1,T2>();
     }
@@ -40,5 +41,23 @@ public class MyDict<T1,T2> implements IDictionary<T1,T2> {
             stringOut.append("; ");
         }
         return stringOut.toString();
+    }
+
+    @Override
+    public Map<T1, T2> getContent() {
+        return dictionary;
+    }
+
+    @Override
+    public void setContent(Map<T1, T2> content) {
+        dictionary = (HashMap<T1, T2>) content;
+    }
+
+    @Override
+    public IDictionary<T1, T2> deepCopy() throws MyException {
+        IDictionary<T1, T2> newDictionary = new MyDict<>();
+        for(T1 key: this.dictionary.keySet())
+            newDictionary.add(key, this.dictionary.get(key));
+        return newDictionary;
     }
 }

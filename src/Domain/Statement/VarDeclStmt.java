@@ -10,7 +10,10 @@ import Domain.Value.Value;
 public class VarDeclStmt implements IStmt{
     String id;
     Type type;
-    public VarDeclStmt(String idd, Type typed) {id =idd; type =typed;}
+    public VarDeclStmt(String idd, Type typed) {
+        id =idd;
+        type =typed;
+    }
 
     public String getId() {return id;}
     public Type getType() {return type;}
@@ -19,7 +22,7 @@ public class VarDeclStmt implements IStmt{
         IDictionary<String, Value> symbolTable = state.getSymTable();
         if(symbolTable.isDefined(id)) throw new StatementException("Variable is already declared;\n");
         else symbolTable.add(id, type.defaultValue());
-        return state;
+        return null;
     }
     public IStmt deepCopy() { return new VarDeclStmt(id, type.deepCopy());}
 

@@ -1,6 +1,7 @@
 package Domain.Exp;
 
 import Domain.ADTS.IDictionary;
+import Domain.ADTS.IHeap;
 import Domain.Exception.EvaluationException;
 import Domain.Exception.MyException;
 import Domain.Types.BoolType;
@@ -28,11 +29,11 @@ public class LogicExp implements Exp{
     public void setOperator(String newOp) {this.operator = newOp;}
 
     @Override
-    public Value eval(IDictionary<String, Value> symbolTable) throws MyException {
+    public Value eval(IDictionary<String, Value> symbolTable, IHeap<Integer, Value> heap) throws MyException {
         Value value1, value2;
-        value1 = this.firstExpression.eval(symbolTable);
+        value1 = this.firstExpression.eval(symbolTable, heap);
         if(value1.getType().equals(new BoolType())){
-            value2 = this.secondExpression.eval(symbolTable);
+            value2 = this.secondExpression.eval(symbolTable, heap);
             if(value2.getType().equals(new BoolType())){
                 BoolValue boolValue1 = (BoolValue)value1;
                 BoolValue boolValue2 = (BoolValue)value2;
@@ -51,6 +52,7 @@ public class LogicExp implements Exp{
         }
         else throw new EvaluationException("Operand 1 is not a boolean! \n");
     }
+
     public String toString(){
         return this.firstExpression.toString() + " " + operator + " " + this.secondExpression.toString();
     }

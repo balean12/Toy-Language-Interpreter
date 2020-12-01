@@ -6,7 +6,7 @@ import Domain.PrgState;
 public class NoOperationStmt implements IStmt{
     public NoOperationStmt(){};
     public PrgState execute(PrgState state) throws MyException {
-        return state;
+        return null;
     }
     public IStmt deepCopy() {return new NoOperationStmt();}
 }

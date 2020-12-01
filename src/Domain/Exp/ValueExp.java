@@ -1,6 +1,7 @@
 package Domain.Exp;
 
 import Domain.ADTS.IDictionary;
+import Domain.ADTS.IHeap;
 import Domain.Exception.MyException;
 import Domain.Value.IntValue;
 import Domain.Value.Value;
@@ -13,8 +14,8 @@ public class ValueExp implements Exp{
     public Value getValue() {return value;}
     public void setValue(Value newValue) {this.value = newValue;}
 
-
-    public Value eval(IDictionary<String, Value> symbolTable) throws MyException{
+    @Override
+    public Value eval(IDictionary<String, Value> tbl, IHeap<Integer, Value> heap) throws MyException {
         return value;
     }
 

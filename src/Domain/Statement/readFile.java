@@ -25,7 +25,7 @@ public class readFile implements IStmt{
     @Override
     public PrgState execute(PrgState state) throws MyException {
         IDictionary<String, Value> symbolTable = state.getSymTable();
-        Value value = expression.eval(symbolTable);
+        Value value = expression.eval(symbolTable, state.getHeap());
         if(!symbolTable.isDefined(variableName))
             throw new StatementException("Variable not defined! \n");
         if(!symbolTable.lookup(variableName).getType().equals(new IntType())){
@@ -56,7 +56,7 @@ public class readFile implements IStmt{
             throw new StatementException("File name invalid! \n");
         }
 
-        return state;
+        return null;
     }
 //    public String toString(){
 //        return "Read file: " + expression.toString() + " | " + "Variable Name: " + variableName;

@@ -1,6 +1,7 @@
 package Domain.Exp;
 
 import Domain.ADTS.IDictionary;
+import Domain.ADTS.IHeap;
 import Domain.Exception.EvaluationException;
 import Domain.Exception.MyException;
 import Domain.Types.IntType;
@@ -18,11 +19,21 @@ public class ArithExp implements Exp {
         operation = op;
     }
 
-    public Value eval(IDictionary<String,Value> symbolTable)throws MyException{
+    public char getOperation() {return this.operation;}
+    public void setOperation(char newOperation) {this.operation = newOperation;}
+
+    public Exp getFirstExpression() {return firstExpression;}
+    public void setFirstExpression(Exp newFirstExpression) { firstExpression = newFirstExpression;}
+
+    public Exp getSecondExpression() {return secondExpression;}
+    public void setSecondExpression(Exp newSecondExpression) { secondExpression = newSecondExpression;}
+
+    @Override
+    public Value eval(IDictionary<String, Value> symbolTable, IHeap<Integer, Value> heap) throws MyException {
         Value value1, value2;
-        value1=firstExpression.eval(symbolTable);
+        value1=firstExpression.eval(symbolTable, heap);
         if(value1.getType().equals(new IntType())){
-            value2=secondExpression.eval(symbolTable);
+            value2=secondExpression.eval(symbolTable, heap);
             if(value2.getType().equals(new IntType())){
                 IntValue intValue1 = (IntValue)value1;
                 IntValue intValue2 = (IntValue)value2;
@@ -34,23 +45,14 @@ public class ArithExp implements Exp {
                 if(operation == '*') return new IntValue(realIntValue1*realIntValue2);
                 if(operation == '/'){
                     if(realIntValue2 == 0) throw new EvaluationException("Division by zero!\n");
-                        else return new IntValue(realIntValue1/realIntValue2);
+                    else return new IntValue(realIntValue1/realIntValue2);
                 }
-            else throw new EvaluationException("Second operand is not an integer!\n");
+                else throw new EvaluationException("Second operand is not an integer!\n");
             }
         }
         else throw new EvaluationException("First operand is not an integer! \n");
-    return null;
+        return null;
     }
-
-    public char getOperation() {return this.operation;}
-    public void setOperation(char newOperation) {this.operation = newOperation;}
-
-    public Exp getFirstExpression() {return firstExpression;}
-    public void setFirstExpression(Exp newFirstExpression) { firstExpression = newFirstExpression;}
-
-    public Exp getSecondExpression() {return secondExpression;}
-    public void setSecondExpression(Exp newSecondExpression) { secondExpression = newSecondExpression;}
 
     public String toString() {
         return this.firstExpression.toString() + this.operation + this.secondExpression.toString();

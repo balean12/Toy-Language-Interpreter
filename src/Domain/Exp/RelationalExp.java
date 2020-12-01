@@ -1,6 +1,7 @@
 package Domain.Exp;
 
 import Domain.ADTS.IDictionary;
+import Domain.ADTS.IHeap;
 import Domain.Exception.EvaluationException;
 import Domain.Exception.MyException;
 import Domain.Types.IntType;
@@ -17,12 +18,14 @@ public class RelationalExp implements Exp{
         this.secondExpression = exp2;
         operation = op;
     }
+
+
     @Override
-    public Value eval(IDictionary<String, Value> symbolTabel) throws MyException {
+    public Value eval(IDictionary<String, Value> symbolTabel, IHeap<Integer, Value> heap) throws MyException {
         Value value1, value2;
-        value1 = firstExpression.eval(symbolTabel);
+        value1 = firstExpression.eval(symbolTabel, heap);
         if(value1.getType().equals(new IntType())){
-            value2 = secondExpression.eval(symbolTabel);
+            value2 = secondExpression.eval(symbolTabel, heap);
             if(value2.getType().equals(new IntType())){
                 IntValue intValue1 = (IntValue) value1;
                 IntValue intValue2 = (IntValue) value2;
@@ -39,12 +42,12 @@ public class RelationalExp implements Exp{
             else throw new EvaluationException("Second operand is not an integer! \n");
         }
         else throw  new EvaluationException("First operand is not an integer!! \n") ;
-    return null;
+        return null;
     }
 
     @Override
     public String toString() {
-        return  firstExpression.toString() +  operation + secondExpression.toString() +'\'';
+        return  firstExpression.toString() +  operation + secondExpression.toString() +'\n';
     }
 
     @Override

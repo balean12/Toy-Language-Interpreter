@@ -21,7 +21,7 @@ public class openRFile implements IStmt{
     public PrgState execute(PrgState state) throws MyException {
         IDictionary<String, Value> symbolTable = state.getSymTable();
         IDictionary<StringValue, BufferedReader> fileTable =state.getFileTable();
-        Value value = expression.eval(symbolTable);
+        Value value = expression.eval(symbolTable, state.getHeap());
         if(!value.getType().equals(new StringType())){
             throw new StatementException("Type doesn't match!\n");
         }
@@ -36,7 +36,7 @@ public class openRFile implements IStmt{
         catch (IOException ioException){
             throw new StatementException("Couldn't open file or file is missing! \n");
         }
-        return state;
+        return null;
     }
 
     @Override

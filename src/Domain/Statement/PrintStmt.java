@@ -20,9 +20,9 @@ public class PrintStmt implements IStmt{
 
     public PrgState execute(PrgState state) throws MyException {
         IList<Value> out = state.getOut();
-        Value valueExpression = this.expression.eval(state.getSymTable());
+        Value valueExpression = this.expression.eval(state.getSymTable(), state.getHeap());
         out.add(valueExpression);
-        return state;
+        return null;
     }
     public String toString() {return "print(" + expression.toString() +")";}
 
