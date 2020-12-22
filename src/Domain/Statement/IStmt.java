@@ -1,9 +1,12 @@
 package Domain.Statement;
 
+import Domain.ADTS.IDictionary;
 import Domain.Exception.MyException;
-import Domain.PrgState;
+import Domain.ProgramState;
+import Domain.Types.IType;
 
 public interface IStmt {
-    PrgState execute(PrgState state) throws MyException;
+    ProgramState execute(ProgramState state) throws MyException;
+    IDictionary<String, IType> typeCheck(IDictionary<String, IType> typeEnvironment) throws MyException;
     IStmt deepCopy();
 }

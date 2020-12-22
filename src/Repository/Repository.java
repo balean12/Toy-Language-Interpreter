@@ -1,38 +1,46 @@
 package Repository;
 
-import Domain.ADTS.IList;
-import Domain.ADTS.MyList;
 import Domain.Exception.MyException;
-import Domain.PrgState;
+import Domain.ProgramState;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Repository implements IRepository{
-    List<PrgState> myProgramStates;
+    List<ProgramState> myProgramStates;
     String logFilePath;
 
     public Repository(String logFilePath){
-        this.myProgramStates = new ArrayList<PrgState>();
+        this.myProgramStates = new ArrayList<ProgramState>();
         this.logFilePath = logFilePath;
     }
 
     @Override
-    public void addProgramState(PrgState program) {
+    public void addProgramState(ProgramState program) {
         this.myProgramStates.add(program);
     }
 
     @Override
-    public List<PrgState> getAllPrograms() {
+    public List<ProgramState> getAllPrograms() {
         return this.myProgramStates;
     }
 
     @Override
-    public void setProgramStateList(List<PrgState> newProgramStateList) {
+    public void setProgramStateList(List<ProgramState> newProgramStateList) {
             this.myProgramStates = newProgramStateList;
     }
 
-    public void logProgramStateExecution(PrgState state) throws MyException, IOException {
+    @Override
+    public void clearLogFile() throws MyException {
+        try {
+            PrintWriter printWriter = new PrintWriter(this.logFilePath);
+            printWriter.close();
+        } catch (IOException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    public void logProgramStateExecution(ProgramState state) throws MyException, IOException {
         PrintWriter logFile;
         logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));
         logFile.println(state.toString());

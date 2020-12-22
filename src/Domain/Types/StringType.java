@@ -1,21 +1,21 @@
 package Domain.Types;
 
 import Domain.Value.StringValue;
-import Domain.Value.Value;
+import Domain.Value.IValue;
 
-public class StringType implements Type {
+public class StringType implements IType {
 
     public boolean equals(Object another){
         return another instanceof StringType;
     }
 
     @Override
-    public Value defaultValue() {
+    public IValue defaultValue() {
         return new StringValue("");
     }
 
     @Override
-    public Type deepCopy() {
+    public IType deepCopy() {
         return new StringType();
     }
 

@@ -22,6 +22,17 @@ public class MyList<T>  implements IList<T>{
     public boolean isEmpty(){
         return list.isEmpty();
     }
+
+    @Override
+    public T getValue(int index) {
+        return list.get(index);
+    }
+
+    @Override
+    public int getSize() {
+        return list.size();
+    }
+
     public String toString(){
         StringBuilder stringOut = new StringBuilder();
         for(T element:list){

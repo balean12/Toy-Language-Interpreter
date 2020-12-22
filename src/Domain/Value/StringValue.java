@@ -1,9 +1,9 @@
 package Domain.Value;
 
 import Domain.Types.StringType;
-import Domain.Types.Type;
+import Domain.Types.IType;
 
-public class StringValue implements  Value{
+public class StringValue implements IValue {
     private final String value;
     public StringValue(String v) {value = v;};
 
@@ -17,12 +17,12 @@ public class StringValue implements  Value{
     }
 
     @Override
-    public Type getType() {
+    public IType getType() {
         return new StringType();
     }
 
     @Override
-    public Value deepCopy() {
+    public IValue deepCopy() {
         return new StringValue(this.value);
     }
 }
