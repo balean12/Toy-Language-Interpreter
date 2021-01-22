@@ -10,17 +10,17 @@ public class CompoundStatement implements IStmt {
     IStmt first;
     IStmt second;
 
-    public IStmt getFirst() { return first;}
-    public IStmt getSecond() {return second;}
-    public CompoundStatement(IStmt frst, IStmt scnd) {
-        first = frst;
-        second = scnd;
-    }
+    //public IStmt getFirst() { return first;}
+    //public IStmt getSecond() {return second;}
+    public CompoundStatement(IStmt first, IStmt second) {
+        this.first = first;
+        this.second = second;   }
 
     public String toString(){
         return "(" + first.toString() + "; " + second.toString() +")";
     }
-    public ProgramState execute(ProgramState state) throws MyException {
+    public ProgramState execute(ProgramState state) //throws MyException
+    {
         IStack<IStmt> stack = state.getStack();
         stack.push(second);
         stack.push(first);

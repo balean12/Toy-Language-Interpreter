@@ -16,8 +16,8 @@ public class IfStatement implements IStmt {
     IStmt thenStatement;
     IStmt elseStatement;
     public IExpression getExpression(){return expression;}
-    public IStmt getThenStatement(){return thenStatement;}
-    public IStmt getElseStatement(){return elseStatement;}
+    //public IStmt getThenStatement(){return thenStatement;}
+    //public IStmt getElseStatement(){return elseStatement;}
 
     public IfStatement(IExpression e, IStmt then, IStmt els) {expression = e; thenStatement = then; elseStatement = els;}
     public ProgramState execute(ProgramState state) throws MyException {

@@ -5,7 +5,7 @@ import Domain.Types.IType;
 
 public class StringValue implements IValue {
     private final String value;
-    public StringValue(String v) {value = v;};
+    public StringValue(String v) {value = v;}
 
     public String getValue() {return value;}
 

@@ -11,7 +11,7 @@ public class Repository implements IRepository{
     String logFilePath;
 
     public Repository(String logFilePath){
-        this.myProgramStates = new ArrayList<ProgramState>();
+        this.myProgramStates = new ArrayList<>();
         this.logFilePath = logFilePath;
     }
 
@@ -40,7 +40,7 @@ public class Repository implements IRepository{
         }
     }
 
-    public void logProgramStateExecution(ProgramState state) throws MyException, IOException {
+    public void logProgramStateExecution(ProgramState state) throws IOException {
         PrintWriter logFile;
         logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));
         logFile.println(state.toString());

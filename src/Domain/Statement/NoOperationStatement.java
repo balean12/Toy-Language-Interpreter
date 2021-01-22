@@ -6,8 +6,9 @@ import Domain.ProgramState;
 import Domain.Types.IType;
 
 public class NoOperationStatement implements IStmt{
-    public NoOperationStatement(){};
-    public ProgramState execute(ProgramState state) throws MyException {
+    public NoOperationStatement(){}
+    public ProgramState execute(ProgramState state) //throws MyException
+    {
         return null;
     }
 

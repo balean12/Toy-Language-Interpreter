@@ -5,7 +5,7 @@ import Domain.Exception.MyException;
 import java.util.Stack;
 public class MyStack<T> implements IStack<T>{
     java.util.Stack<T> stack;
-    public MyStack() {stack = new Stack<T>();}
+    public MyStack() {stack = new Stack<>();}
     public T pop() throws MyException {
         if(stack.isEmpty()){
             throw new ADTException("Stack is empty! /n");

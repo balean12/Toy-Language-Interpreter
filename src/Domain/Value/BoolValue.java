@@ -20,8 +20,7 @@ public class BoolValue implements IValue {
     }
 
     public IValue deepCopy(){
-        BoolValue copy = new BoolValue(this.value);
-        return copy;
+        return new BoolValue(this.value);
     }
 }
 

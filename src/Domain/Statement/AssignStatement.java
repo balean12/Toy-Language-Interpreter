@@ -1,7 +1,7 @@
 package Domain.Statement;
 
 import Domain.ADTS.IDictionary;
-import Domain.ADTS.IStack;
+//import Domain.ADTS.IStack;
 import Domain.Exception.MyException;
 import Domain.Exception.StatementException;
 import Domain.Exp.IExpression;
@@ -23,7 +23,7 @@ public class AssignStatement implements IStmt {
     public IExpression getExpression() {return expression;}
 
     public ProgramState execute(ProgramState state) throws MyException {
-        IStack<IStmt> stack = state.getStack();
+        //IStack<IStmt> stack = state.getStack();
         IDictionary<String, IValue> symTbl = state.getSymTable();
 
         if(symTbl.isDefined(id)){

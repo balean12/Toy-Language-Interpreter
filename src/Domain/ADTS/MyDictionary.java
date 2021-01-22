@@ -9,7 +9,7 @@ import java.util.Map;
 public class MyDictionary<T1,T2> implements IDictionary<T1,T2> {
     private HashMap<T1,T2> dictionary;
     public MyDictionary(){
-        dictionary = new HashMap<T1,T2>();
+        dictionary = new HashMap<>();
     }
     public void add(T1 key, T2 value) throws MyException {
         if(this.dictionary.containsKey(key)){

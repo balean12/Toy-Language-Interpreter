@@ -2,7 +2,6 @@ package FXMLFiles;
 
 import Domain.Exp.*;
 import Domain.Statement.*;
-import Domain.Types.BooleanType;
 import Domain.Types.IntegerType;
 import Domain.Types.ReferenceType;
 import Domain.Types.StringType;
@@ -12,9 +11,9 @@ import Domain.Value.StringValue;
 import java.util.ArrayList;
 
 public class Programs {
-    private ArrayList<IStmt> programs;
+    private final ArrayList<IStmt> programs;
     public Programs() {
-        programs = new ArrayList<IStmt>();
+        programs = new ArrayList<>();
         IStmt program1 = new CompoundStatement(
                 new VariableDeclarationStatement("v", new IntegerType()),
                 new CompoundStatement(
@@ -83,7 +82,7 @@ public class Programs {
                         new CompoundStatement(
                                 new OpenRFileStatement(new VariableExpression("varf")),
                                 new CompoundStatement(
-                                        new VariableDeclarationStatement("a", new IntegerType()),//HERERERERE
+                                        new VariableDeclarationStatement("a", new IntegerType()),
                                         new CompoundStatement(
                                                 new ReadFileStatement(new VariableExpression("varf"), "a"),
                                                 new CompoundStatement(
@@ -142,7 +141,7 @@ public class Programs {
                                         new AssignStatement("v", new ArithmeticExpression(new VariableExpression("v"), new ValueExpression(new IntValue(1)), '-'))
                                 ),
                                         new RelationalExpression(new VariableExpression("v"), new ValueExpression(new IntValue(0)), ">" )),
-                                //new ArithExp(new VarExp("v"), new ValueExp(new IntValue(1)), '-')),
+                                //new ArithmeticExpression(new VariableExp("v"), new ValueExp(new IntValue(1)), '-')),
                                 new PrintStatement(new VariableExpression("v"))
                         )
                 )

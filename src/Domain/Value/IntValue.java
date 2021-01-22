@@ -20,7 +20,6 @@ public class IntValue implements IValue {
     }
 
     public IValue deepCopy() {
-        IntValue copy = new IntValue(this.value);
-        return copy;
+        return new IntValue(this.value);
     }
 }

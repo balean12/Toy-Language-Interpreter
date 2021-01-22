@@ -15,7 +15,7 @@ public class ValueExpression implements IExpression {
     public void setValue(IValue newValue) {this.value = newValue;}
 
     @Override
-    public IValue eval(IDictionary<String, IValue> tbl, IHeap<Integer, IValue> heap) throws MyException {
+    public IValue eval(IDictionary<String, IValue> tbl, IHeap<Integer, IValue> heap) {
         return value;
     }
 

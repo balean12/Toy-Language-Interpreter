@@ -20,14 +20,14 @@ public class ArithmeticExpression implements IExpression {
         operation = op;
     }
 
-    public char getOperation() {return this.operation;}
-    public void setOperation(char newOperation) {this.operation = newOperation;}
+    //public char getOperation() {return this.operation;}
+    //public void setOperation(char newOperation) {this.operation = newOperation;}
 
-    public IExpression getFirstExpression() {return firstExpression;}
+    //public IExpression getFirstExpression() {return firstExpression;}
     public void setFirstExpression(IExpression newFirstExpression) { firstExpression = newFirstExpression;}
 
-    public IExpression getSecondExpression() {return secondExpression;}
-    public void setSecondExpression(IExpression newSecondExpression) { secondExpression = newSecondExpression;}
+    //public IExpression getSecondExpression() {return secondExpression;}
+    //public void setSecondExpression(IExpression newSecondExpression) { secondExpression = newSecondExpression;}
 
     @Override
     public IValue eval(IDictionary<String, IValue> symbolTable, IHeap<Integer, IValue> heap) throws MyException {

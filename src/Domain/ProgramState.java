@@ -31,16 +31,16 @@ public class ProgramState {
 
     public IDictionary<StringValue, BufferedReader> getFileTable(){return fileTable;}
 
-    public IStmt getOriginalProgram() {return originalProgram;}
+    //public IStmt getOriginalProgram() {return originalProgram;}
 
     public IHeap<Integer, IValue> getHeap(){ return Heap; }
 
-    public ProgramState(IStack<IStmt> stack, IDictionary<String, IValue> symbolTable, IList<IValue> outt, IStmt originalProgram,
+    public ProgramState(IStack<IStmt> stack, IDictionary<String, IValue> symbolTable, IList<IValue> out, IStmt originalProgram,
                         IDictionary<StringValue, BufferedReader> fileTable, IHeap<Integer, IValue> heap){
         exeStack=stack;
         symTable = symbolTable;
-        out = outt;
-        originalProgram = originalProgram.deepCopy();
+        this.out = out;
+        this.originalProgram = originalProgram.deepCopy();
         exeStack.push(originalProgram);
         this.fileTable = fileTable;
         this.Heap = heap;

@@ -9,8 +9,7 @@ import Domain.Exception.MyException;
 import Domain.ProgramState;
 import Domain.Statement.IStmt;
 import Repository.Repository;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,7 +28,7 @@ public class ControllerPrograms {
     @FXML
     private Label currentProgramLabel;
 
-    public ControllerPrograms(){};
+    public ControllerPrograms(){}
 
 
     @FXML
@@ -40,7 +39,7 @@ public class ControllerPrograms {
 
     }
     public void startProgram(){
-        Integer selectedProgramIndex = allProgramListView.getSelectionModel().getSelectedIndex();
+        int selectedProgramIndex = allProgramListView.getSelectionModel().getSelectedIndex();
         System.out.println("Program: " + selectedProgramIndex);
 
         Programs programs = new Programs();
@@ -63,8 +62,8 @@ public class ControllerPrograms {
             loader.setLocation(getClass().getResource("/FXMLFiles/ProgramRunning.fxml"));
             Parent root = loader.load();
 
-            ProgramRunningController runWindownController = loader.getController();
-            runWindownController.setControllerForProgram(controller);
+            ProgramRunningController runWindowController = loader.getController();
+            runWindowController.setControllerForProgram(controller);
 
             Stage newStage = new Stage();
             newStage.setTitle("Program: ");

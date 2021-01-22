@@ -1,8 +1,6 @@
 package Domain.TableViewData;
 
 
-import Domain.Value.IValue;
-
 public class SymbolData {
     private String variableName;
     private String value;

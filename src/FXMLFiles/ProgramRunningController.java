@@ -2,8 +2,6 @@ package FXMLFiles;
 
 import Controller.Controller;
 import Domain.ADTS.IList;
-import Domain.ADTS.MyList;
-import Domain.ADTS.MyStack;
 import Domain.Exception.MyException;
 import Domain.ProgramState;
 import Domain.Statement.IStmt;
@@ -11,7 +9,6 @@ import Domain.TableViewData.HeapData;
 import Domain.TableViewData.SymbolData;
 import Domain.Value.IValue;
 import Domain.Value.StringValue;
-import com.sun.jdi.Value;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -79,7 +76,8 @@ public class ProgramRunningController implements Initializable {
         text.setFocusTraversable(false);
     }
 
-    private void populateExecutionStack(ProgramState programState) throws MyException {
+    private void populateExecutionStack(ProgramState programState) //throws MyException
+    {
         this.executionStackList.getItems().clear();
         Stack<IStmt> executionStack = programState.getStack().getContent();
         Stack<?> cloneStack = (Stack<?>) executionStack.clone();
@@ -88,7 +86,8 @@ public class ProgramRunningController implements Initializable {
         }
     }
 
-    private void populateOutputList() throws MyException{
+    private void populateOutputList()// throws MyException
+    {
         this.outTableList.getItems().clear();
         IList<IValue> output = this.currentProgramState.getOut();
         for(int i=0; i<output.getSize(); i++){
@@ -97,7 +96,8 @@ public class ProgramRunningController implements Initializable {
         }
     }
 
-    private void populateFileTableList() throws MyException{
+    private void populateFileTableList() //throws MyException
+    {
         this.fileTableList.getItems().clear();
         Map<StringValue, BufferedReader> fileTable = this.currentProgramState.getFileTable().getContent();
         for(StringValue key : fileTable.keySet()){
@@ -106,7 +106,8 @@ public class ProgramRunningController implements Initializable {
         }
     }
 
-    private void populateHeapTable() throws MyException{
+    private void populateHeapTable() //throws MyException
+    {
         this.heapTableList.getItems().clear();
         ObservableList<HeapData> heapData = FXCollections.observableArrayList();
         Map<Integer,IValue> heap = this.currentProgramState.getHeap().getContent();
@@ -118,7 +119,8 @@ public class ProgramRunningController implements Initializable {
         //this.heapTableList.getItems().add(heapData);
     }
 
-    private void populateSymbolTable(ProgramState programState) throws MyException{
+    private void populateSymbolTable(ProgramState programState) //throws MyException
+    {
         this.symbolTableList.getItems().clear();
         ObservableList<SymbolData> symbolData = FXCollections.observableArrayList();
         Map<String, IValue> symbolTable = programState.getSymTable().getContent();
@@ -146,7 +148,8 @@ public class ProgramRunningController implements Initializable {
         symbolTableList.getColumns().addAll(variableNameColumn, valColumn);
     }
 
-    private void populateProgramStateIds() throws MyException{
+    private void populateProgramStateIds() //throws MyException
+    {
         this.programStates = this.controller.getRepository().getAllPrograms();
         this.numberOfProgramStatesTextField.setText(Integer.toString(this.programStates.size()));
 
@@ -156,7 +159,8 @@ public class ProgramRunningController implements Initializable {
         }
     }
 
-    public void populateFromProgramState() throws MyException {
+    public void populateFromProgramState() //throws MyException
+    {
         String selectedId = this.programStateIDsList.getSelectionModel().getSelectedItem();
         for(ProgramState programState : this.programStates){
             if(Integer.toString(programState.getId()).equals(selectedId) && this.currentProgramState != programState){

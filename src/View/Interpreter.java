@@ -14,14 +14,6 @@ import Domain.Value.StringValue;
 import Domain.Value.IValue;
 import Repository.IRepository;
 import Repository.Repository;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 
@@ -29,11 +21,11 @@ public class Interpreter {
 
     public static void main(String[] args){
 
-        IStack<IStmt> exeStack1 = new MyStack<IStmt>();
-        IDictionary<String , IValue> symTable1 = new MyDictionary<String, IValue>();
-        IList<IValue> out1 = new MyList<IValue>();
-        IDictionary<StringValue, BufferedReader> fileTable1 = new MyDictionary<StringValue,BufferedReader>();
-        IHeap<Integer, IValue> heap1 = new MyHeap<Integer, IValue>();
+        IStack<IStmt> exeStack1 = new MyStack<>();
+        IDictionary<String , IValue> symTable1 = new MyDictionary<>();
+        IList<IValue> out1 = new MyList<>();
+        IDictionary<StringValue, BufferedReader> fileTable1 = new MyDictionary<>();
+        IHeap<Integer, IValue> heap1 = new MyHeap<>();
 
         IStmt program1 = new CompoundStatement(
                 new VariableDeclarationStatement("v", new IntegerType()),
@@ -80,11 +72,11 @@ public class Interpreter {
         //int v;string file;file="test1.txt";openRFile(file);readFile(file,v);print(v);closeRFile(file);
         //int a;int b;a=2+3*5;b=a+1;print(b)\\
         //int a; int b; string file; file = "test1.txt"; openRFile(file); readFile(file,a); readFile(file,b);a=a*2-3;b=a+1;print(b);closeRFile(file)
-        IStack<IStmt> exeStack2 = new MyStack<IStmt>();
-        IDictionary<String , IValue> symTable2 = new MyDictionary<String, IValue>();
-        IList<IValue> out2 = new MyList<IValue>();
-        IDictionary<StringValue, BufferedReader> fileTable2 = new MyDictionary<StringValue,BufferedReader>();
-        IHeap<Integer, IValue> heap2 = new MyHeap<Integer, IValue>();
+        IStack<IStmt> exeStack2 = new MyStack<>();
+        IDictionary<String , IValue> symTable2 = new MyDictionary<>();
+        IList<IValue> out2 = new MyList<>();
+        IDictionary<StringValue, BufferedReader> fileTable2 = new MyDictionary<>();
+        IHeap<Integer, IValue> heap2 = new MyHeap<>();
         IStmt program2 = new CompoundStatement(
                 new VariableDeclarationStatement("a", new BooleanType()),
                 new CompoundStatement(
@@ -132,11 +124,11 @@ public class Interpreter {
         controller2.addProgram(prg2);
 
 
-        IStack<IStmt> exeStack3 = new MyStack<IStmt>();
-        IDictionary<String , IValue> symTable3 = new MyDictionary<String, IValue>();
-        IList<IValue> out3 = new MyList<IValue>();
-        IDictionary<StringValue, BufferedReader> fileTable3 = new MyDictionary<StringValue,BufferedReader>();
-        IHeap<Integer, IValue> heap3 = new MyHeap<Integer, IValue>();
+        IStack<IStmt> exeStack3 = new MyStack<>();
+        IDictionary<String , IValue> symTable3 = new MyDictionary<>();
+        IList<IValue> out3 = new MyList<>();
+        IDictionary<StringValue, BufferedReader> fileTable3 = new MyDictionary<>();
+        IHeap<Integer, IValue> heap3 = new MyHeap<>();
         IStmt program3 = new CompoundStatement(
                 new VariableDeclarationStatement("varf", new StringType()),
                 new CompoundStatement(
@@ -164,8 +156,8 @@ public class Interpreter {
         // Ref int v;new(v,20);print(rH(v)); wH(v,30);print(rH(v)+5);
         IStack<IStmt> exeStack4 = new MyStack<>();
         IDictionary<String, IValue> symbolTable4 = new MyDictionary<>();
-        IDictionary<StringValue, BufferedReader> fileTable4 = new MyDictionary<StringValue,BufferedReader>();
-        IHeap<Integer, IValue> heap4 = new MyHeap<Integer, IValue>();
+        IDictionary<StringValue, BufferedReader> fileTable4 = new MyDictionary<>();
+        IHeap<Integer, IValue> heap4 = new MyHeap<>();
         IList<IValue> out4 = new MyList<>();
 
 
@@ -195,8 +187,8 @@ public class Interpreter {
 
         IStack<IStmt> exeStack5 = new MyStack<>();
         IDictionary<String, IValue> symbolTable5 = new MyDictionary<>();
-        IDictionary<StringValue, BufferedReader> fileTable5 = new MyDictionary<StringValue,BufferedReader>();
-        IHeap<Integer, IValue> heap5 = new MyHeap<Integer, IValue>();
+        IDictionary<StringValue, BufferedReader> fileTable5 = new MyDictionary<>();
+        IHeap<Integer, IValue> heap5 = new MyHeap<>();
         IList<IValue> out5 = new MyList<>();
         ////Ref int v;new(v,20);Ref Ref int a; new(a,v); writeheap(v,30);print(rH(rH(a)))
         IStmt program5 = new CompoundStatement(
@@ -222,8 +214,8 @@ public class Interpreter {
 
         IStack<IStmt> exeStack6 = new MyStack<>();
         IDictionary<String, IValue> symbolTable6 = new MyDictionary<>();
-        IDictionary<StringValue, BufferedReader> fileTable6 = new MyDictionary<StringValue,BufferedReader>();
-        IHeap<Integer, IValue> heap6 = new MyHeap<Integer, IValue>();
+        IDictionary<StringValue, BufferedReader> fileTable6 = new MyDictionary<>();
+        IHeap<Integer, IValue> heap6 = new MyHeap<>();
         IList<IValue> out6 = new MyList<>();
         //int v; v=4; (while (v>0) print(v);v=v-1);print(v)
         IStmt program6 = new CompoundStatement(
@@ -248,8 +240,8 @@ public class Interpreter {
 
         IStack<IStmt> exeStack7 = new MyStack<>();
         IDictionary<String, IValue> symbolTable7 = new MyDictionary<>();
-        IDictionary<StringValue, BufferedReader> fileTable7 = new MyDictionary<StringValue,BufferedReader>();
-        IHeap<Integer, IValue> heap7 = new MyHeap<Integer, IValue>();
+        IDictionary<StringValue, BufferedReader> fileTable7 = new MyDictionary<>();
+        IHeap<Integer, IValue> heap7 = new MyHeap<>();
         IList<IValue> out7 = new MyList<>();
         IStmt program7  = new CompoundStatement(
                 new VariableDeclarationStatement("v", new IntegerType()),
@@ -287,8 +279,8 @@ public class Interpreter {
 
         IStack<IStmt> exeStack8 = new MyStack<>();
         IDictionary<String, IValue> symbolTable8 = new MyDictionary<>();
-        IDictionary<StringValue, BufferedReader> fileTable8 = new MyDictionary<StringValue,BufferedReader>();
-        IHeap<Integer, IValue> heap8 = new MyHeap<Integer, IValue>();
+        IDictionary<StringValue, BufferedReader> fileTable8 = new MyDictionary<>();
+        IHeap<Integer, IValue> heap8 = new MyHeap<>();
         IList<IValue> out8 = new MyList<>();
         IStmt program8  = new CompoundStatement(
                 new VariableDeclarationStatement("v", new IntegerType()),

@@ -18,16 +18,16 @@ public class NewStatement implements IStmt {
         this.variableName = variableName;
         this.expression = expression;
     }
-    public String getVariableName() {
+   /* public String getVariableName() {
         return variableName;
-    }
+    }*/
     public IExpression getExpression(){
         return expression;
     }
 
     @Override
     public ProgramState execute(ProgramState state) throws MyException {
-        var stack = state.getStack();
+        //var stack = state.getStack();
         var symbolTable = state.getSymTable();
         var heap = state.getHeap();
 

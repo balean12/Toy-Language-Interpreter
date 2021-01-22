@@ -23,11 +23,11 @@ public class RelationalExpression implements IExpression {
 
 
     @Override
-    public IValue eval(IDictionary<String, IValue> symbolTabel, IHeap<Integer, IValue> heap) throws MyException {
+    public IValue eval(IDictionary<String, IValue> symbolTable, IHeap<Integer, IValue> heap) throws MyException {
         IValue value1, value2;
-        value1 = firstExpression.eval(symbolTabel, heap);
+        value1 = firstExpression.eval(symbolTable, heap);
         if(value1.getType().equals(new IntegerType())){
-            value2 = secondExpression.eval(symbolTabel, heap);
+            value2 = secondExpression.eval(symbolTable, heap);
             if(value2.getType().equals(new IntegerType())){
                 IntValue intValue1 = (IntValue) value1;
                 IntValue intValue2 = (IntValue) value2;

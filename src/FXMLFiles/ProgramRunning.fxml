@@ -54,7 +54,7 @@
       <VBox layoutX="429.0" layoutY="80.0" prefHeight="75.0" prefWidth="398.0">
          <children>
             <Label prefHeight="17.0" prefWidth="399.0" text="Program States IDs" />
-            <ListView fx:id="programStateIDsList" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="programStateIDsList" onMouseClicked="#populateFromProgramState" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </VBox>
       <GridPane alignment="CENTER_RIGHT" layoutX="69.0" layoutY="428.0" prefHeight="69.0" prefWidth="300.0">

@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class TextMenu {
-    private Map<String, Command> commands;
+    private final Map<String, Command> commands;
     public TextMenu(){
         commands= new HashMap<>();
     }
@@ -23,7 +23,7 @@ public class TextMenu {
         Scanner scanner = new Scanner(System.in);
         while(true){
             printMenu();
-            System.out.printf("Input the option:");
+            System.out.print("Input the option:");
             String key = scanner.nextLine();
             Command command = commands.get(key);
             if(command == null) {

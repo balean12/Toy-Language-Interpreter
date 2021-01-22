@@ -12,10 +12,7 @@ import Domain.Value.IValue;
 import Repository.IRepository;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
@@ -37,10 +34,8 @@ public class Controller {
         programList.forEach(program -> {
             try {
                 repository.logProgramStateExecution(program);
-            } catch (MyException exception) {
+            } catch (MyException | IOException exception) {
                 exception.printStackTrace();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
             }
         });
 
@@ -63,7 +58,7 @@ public class Controller {
                             return null;
                         }
                     })
-                    .filter(program -> program != null)
+                    .filter(Objects::nonNull)
                     .collect(Collectors.toList());
             //add the new created threads to the list of existing threads
             programList.addAll(newProgramList);
@@ -129,11 +124,11 @@ public class Controller {
     }
 
     private List<Integer> getSymbolTableAddresses(List<Collection<IValue>> symbolTableValuesList){
-        List<Integer> addresses = new ArrayList<Integer>();
+        List<Integer> addresses = new ArrayList<>();
         symbolTableValuesList.forEach(symbolTable -> symbolTable.stream()
                 .filter(variable -> variable instanceof ReferenceValue)
                 .map(variable -> ((ReferenceValue)variable).getAddress())
-                .forEach(address -> addresses.add(address)));
+                .forEach(addresses::add));
 
         return addresses;
 
@@ -150,9 +145,9 @@ public class Controller {
         this.repository.addProgramState(program);
     }
 
-    public String getAllSteps(){
+  /*  public String getAllSteps(){
         return this.stringAllSteps.toString();
-    }
+    }*/
 
     public void runOneStepGUI() throws MyException{
         List<ProgramState> programList = removeCompletedProgram(repository.getAllPrograms());
