@@ -206,6 +206,95 @@ public class Programs {
                                         )
                                 )
                         )));
+        // Ref int a; new(a,20);
+        //(for(v=0;v<3;v=v+1) fork(print(v);v=v*rh(a)));
+        //print(rh(a))
+        IStmt program12 = new CompoundStatement(
+                new VariableDeclarationStatement("a", new ReferenceType(new IntegerType())),
+                new CompoundStatement(
+                        new NewStatement("a", new ValueExpression(new IntValue(20))),
+                        new CompoundStatement(
+                                new ForStatement("v",
+                                        new ValueExpression(new IntValue(0)),
+                                        new ValueExpression(new IntValue(3)),
+                                        new ArithmeticExpression(new VariableExpression("v"), new ValueExpression(new IntValue(1)), '+'),
+                                        new ForkStatement(
+                                                new CompoundStatement(
+                                                        new PrintStatement(new VariableExpression("v")),
+                                                        new AssignStatement("v",
+                                                                new ArithmeticExpression(
+                                                                        new VariableExpression("v"),
+                                                                        new ReadHeapExpression(new VariableExpression("a")),
+                                                                        '*'))
+                                                )
+                                        )
+                                ),
+                                new PrintStatement(new ReadHeapExpression(new VariableExpression("a"))))));
+        //Ref int v1; int cnt;
+        //new(v1,1);createSemaphore(cnt,rH(v1));
+        //fork( acquire(cnt); wh(v1,rh(v1)*10); print(rh(v1)); release(cnt) );
+        //fork( acquire(cnt); wh(v1,rh(v1)*10); wh(v1,rh(v1)*2); print(rh(v1));release(cnt) );
+        //acquire(cnt);
+        //print(rh(v1)-1);
+        //release(cnt)
+
+        /*Ref int v1; int cnt;
+        new(v1,1);createSemaphore(cnt,rH(v1));
+        fork(acquire(cnt);wh(v1,rh(v1)*10));print(rh(v1));release(cnt));
+        fork(acquire(cnt);wh(v1,rh(v1)*10));wh(v1,rh(v1)*2));print(rh(v1));release(cnt));
+        acquire(cnt);
+        print(rh(v1)-1);
+        release(cnt)
+        The final Out should be {10,200,9} or {10,9,200}.*/
+
+        IStmt program10 = new CompoundStatement(
+                new VariableDeclarationStatement("v1", new ReferenceType(new IntegerType())),
+                new CompoundStatement(
+                        new VariableDeclarationStatement("cnt", new IntegerType()),
+                        new CompoundStatement(
+                                new NewStatement("v1", new ValueExpression(new IntValue(1))),
+                                new CompoundStatement(
+                                        new CreateSemaphoreStatement("cnt", new ReadHeapExpression(new VariableExpression("v1"))),
+                                        new CompoundStatement(
+                                                new ForkStatement(
+                                                        new CompoundStatement(
+                                                                new Acquire("cnt"),
+                                                                new CompoundStatement(
+                                                                        new WriteHeapStatement("v1",
+                                                                                new ArithmeticExpression(
+                                                                                        new ReadHeapExpression(new VariableExpression("v1")),
+                                                                                        new ValueExpression(new IntValue(10)),
+                                                                                        '*')),
+                                                                        new CompoundStatement(
+                                                                                new PrintStatement(new ReadHeapExpression(new VariableExpression("v1"))),
+                                                                                new Release("cnt"))))),
+                                                new CompoundStatement(
+                                                        new ForkStatement(
+                                                                new CompoundStatement(
+                                                                        new Acquire("cnt"),
+                                                                        new CompoundStatement(
+                                                                                new WriteHeapStatement("v1",
+                                                                                        new ArithmeticExpression(
+                                                                                                new ReadHeapExpression(new VariableExpression("v1")),
+                                                                                                new ValueExpression(new IntValue(10)),
+                                                                                                '*')),
+                                                                                new CompoundStatement(
+                                                                                        new WriteHeapStatement("v1",
+                                                                                                new ArithmeticExpression(
+                                                                                                        new ReadHeapExpression(new VariableExpression("v1")),
+                                                                                                        new ValueExpression(new IntValue(2)),
+                                                                                                        '*')),
+                                                                                        new CompoundStatement(
+                                                                                                new PrintStatement(new ReadHeapExpression(new VariableExpression("v1"))),
+                                                                                                new Release("cnt")))))),
+                                                        new CompoundStatement(
+                                                                new Acquire("cnt"),
+                                                                new CompoundStatement(
+                                                                        new PrintStatement(new ArithmeticExpression(
+                                                                                new ReadHeapExpression(new VariableExpression("v1")),
+                                                                                new ValueExpression(new IntValue(1)),
+                                                                                '-')),
+                                                                        new Release("cnt")))))))));
         this.programs.add(program1);
         this.programs.add(program2);
         this.programs.add(program3);
@@ -214,6 +303,7 @@ public class Programs {
         this.programs.add(program6);
         this.programs.add(program7);
         this.programs.add(program8);
+        this.programs.add(program10);
 
     }
     public ArrayList<IStmt> getAllPrograms() {

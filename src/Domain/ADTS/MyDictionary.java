@@ -5,11 +5,12 @@ import Domain.Exception.MyException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MyDictionary<T1,T2> implements IDictionary<T1,T2> {
-    private HashMap<T1,T2> dictionary;
+    private ConcurrentHashMap<T1,T2> dictionary;
     public MyDictionary(){
-        dictionary = new HashMap<>();
+        dictionary = new ConcurrentHashMap<>();
     }
     public void add(T1 key, T2 value) throws MyException {
         if(this.dictionary.containsKey(key)){
@@ -50,7 +51,7 @@ public class MyDictionary<T1,T2> implements IDictionary<T1,T2> {
 
     @Override
     public void setContent(Map<T1, T2> content) {
-        dictionary = (HashMap<T1, T2>) content;
+        dictionary = (ConcurrentHashMap<T1, T2>) content;
     }
 
     @Override

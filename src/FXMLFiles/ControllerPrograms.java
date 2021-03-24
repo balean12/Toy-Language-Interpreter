@@ -1,10 +1,7 @@
 package FXMLFiles;
 
 import Controller.Controller;
-import Domain.ADTS.MyDictionary;
-import Domain.ADTS.MyHeap;
-import Domain.ADTS.MyList;
-import Domain.ADTS.MyStack;
+import Domain.ADTS.*;
 import Domain.Exception.MyException;
 import Domain.ProgramState;
 import Domain.Statement.IStmt;
@@ -50,7 +47,8 @@ public class ControllerPrograms {
                 new MyList<>(),
                 selectedProgramStatement,
                 new MyDictionary<>(),
-                new MyHeap<>());
+                new MyHeap<>(),
+                new CountSemaphore<>());
         Repository repository = new Repository("log" + selectedProgramIndex + 1 + ".txt");
         repository.addProgramState(programState);
         Controller controller = new Controller(repository);

@@ -120,7 +120,7 @@ public class Controller {
     public Map<Integer, IValue> garbageCollector(List<Integer> symbolTableAddresses, List<Integer> heapAddresses, Map<Integer, IValue> heap) {
         return heap.entrySet().stream()
                 .filter(e -> symbolTableAddresses.contains(e.getKey()) || heapAddresses.contains(e.getKey()))
-                .collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue));
+                .collect(Collectors.toConcurrentMap(Map.Entry::getKey,Map.Entry::getValue));
     }
 
     private List<Integer> getSymbolTableAddresses(List<Collection<IValue>> symbolTableValuesList){

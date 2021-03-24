@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLFiles.ControllerPrograms">
+   <children>
+      <ListView fx:id="allProgramListView" onMouseClicked="#startProgram" prefHeight="286.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="70.0" />
+      <Label fx:id="currentProgramLabel" prefHeight="30.0" prefWidth="401.0" text=" Choose a program from the list below." AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="20.0">
+         <padding>
+            <Insets left="100.0" />
+         </padding>
+      </Label>
+   </children>
+</AnchorPane>

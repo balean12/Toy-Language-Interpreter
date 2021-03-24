@@ -7,6 +7,7 @@ import Domain.ProgramState;
 import Domain.Statement.IStmt;
 import Domain.TableViewData.HeapData;
 import Domain.TableViewData.SymbolData;
+import Domain.TableViewData.SemaphoreData;
 import Domain.Value.IValue;
 import Domain.Value.StringValue;
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.io.BufferedReader;
 import java.net.URL;
@@ -41,6 +43,8 @@ public class ProgramRunningController implements Initializable {
     private TableView<HeapData> heapTableList;
     @FXML
     private ListView<String> programStateIDsList;
+    @FXML
+    private TableView<SemaphoreData> semaphoreTable;
     @FXML
     private ListView<String> executionStackList;
     @FXML
@@ -146,6 +150,15 @@ public class ProgramRunningController implements Initializable {
         TableColumn<SymbolData, String> valColumn = new TableColumn<>("Value");
         valColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
         symbolTableList.getColumns().addAll(variableNameColumn, valColumn);
+
+        TableColumn<SemaphoreData,String> indexColumn = new TableColumn<>("Index");
+        indexColumn.setCellValueFactory(new PropertyValueFactory<>("index"));
+        TableColumn<SemaphoreData,Integer> valueColumnSem = new TableColumn<>("Value");
+        valueColumnSem.setCellValueFactory(new PropertyValueFactory<>("value"));
+        TableColumn<SemaphoreData,ArrayList<Integer>>valuesColumn = new TableColumn<>("Values");
+        valuesColumn.setCellValueFactory(new PropertyValueFactory<>("values"));
+        this.semaphoreTable.getColumns().addAll(indexColumn,valueColumnSem,valuesColumn);
+
     }
 
     private void populateProgramStateIds() //throws MyException
@@ -157,6 +170,18 @@ public class ProgramRunningController implements Initializable {
         for(ProgramState program : this.programStates){
             this.programStateIDsList.getItems().add(Integer.toString(program.getId()));
         }
+    }
+    private void populateSemaphoreTable(ProgramState programState){
+
+        this.semaphoreTable.getItems().clear();
+        ObservableList<SemaphoreData> semaphoreData = FXCollections.observableArrayList();
+        Map<Integer, Pair<Integer, ArrayList<Integer>>> semaphoreTable = programState.getSemaphoreTable().getContent();
+        for(Integer key : semaphoreTable.keySet()){
+            Pair<Integer, ArrayList<Integer>> pair = semaphoreTable.get(key);
+            semaphoreData.add(new SemaphoreData(key,pair.getKey(),pair.getValue()));
+        }
+        this.semaphoreTable.setItems(semaphoreData);
+
     }
 
     public void populateFromProgramState() //throws MyException
@@ -179,6 +204,7 @@ public class ProgramRunningController implements Initializable {
             populateOutputList();
             populateFileTableList();
             populateHeapTable();
+            populateSemaphoreTable(this.currentProgramState);
             this.controller.runOneStepGUI();
         }catch(MyException exception){
             Alert alert = new Alert(Alert.AlertType.INFORMATION, exception.getMessage(), ButtonType.OK);

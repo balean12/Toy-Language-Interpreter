@@ -14,18 +14,21 @@ import Domain.Value.StringValue;
 import Domain.Value.IValue;
 import Repository.IRepository;
 import Repository.Repository;
+import javafx.util.Pair;
 
 import java.io.BufferedReader;
+import java.util.ArrayList;
 
 public class Interpreter {
 
     public static void main(String[] args){
 
-        IStack<IStmt> exeStack1 = new MyStack<>();
+        /*IStack<IStmt> exeStack1 = new MyStack<>();
         IDictionary<String , IValue> symTable1 = new MyDictionary<>();
         IList<IValue> out1 = new MyList<>();
         IDictionary<StringValue, BufferedReader> fileTable1 = new MyDictionary<>();
         IHeap<Integer, IValue> heap1 = new MyHeap<>();
+        ICountSemaphore<Integer, Pair<Integer, ArrayList<Integer>>> semaphore1 = new CountSemaphore<>();
 
         IStmt program1 = new CompoundStatement(
                 new VariableDeclarationStatement("v", new IntegerType()),
@@ -46,13 +49,13 @@ public class Interpreter {
                         )
                 )
         );
-        ProgramState prg1 = new ProgramState(exeStack1,symTable1,out1,program1, fileTable1,heap1);
+        ProgramState prg1 = new ProgramState(exeStack1,symTable1,out1,program1, fileTable1,heap1,semaphore1);
         IRepository repository1 = new Repository("log1.txt");
         Controller controller1 = new Controller(repository1);
         controller1.addProgram(prg1);
 
         //int a;int b;a=2+3*5;b=a+1;print(b)\\
-        /*IStmt program2 = new CompStmt(
+        *//*IStmt program2 = new CompStmt(
                 new VarDeclStmt("a", new IntType()),
                 new CompStmt(
                         new VarDeclStmt("b", new IntType()),
@@ -68,7 +71,7 @@ public class Interpreter {
                                                 new ArithExp(
                                                         new VarExp("a"),
                                                         new ValueExp(new IntValue(1)), '+')),
-                                        new PrintStmt(new VarExp("b"))))));*/
+                                        new PrintStmt(new VarExp("b"))))));*//*
         //int v;string file;file="test1.txt";openRFile(file);readFile(file,v);print(v);closeRFile(file);
         //int a;int b;a=2+3*5;b=a+1;print(b)\\
         //int a; int b; string file; file = "test1.txt"; openRFile(file); readFile(file,a); readFile(file,b);a=a*2-3;b=a+1;print(b);closeRFile(file)
@@ -77,6 +80,7 @@ public class Interpreter {
         IList<IValue> out2 = new MyList<>();
         IDictionary<StringValue, BufferedReader> fileTable2 = new MyDictionary<>();
         IHeap<Integer, IValue> heap2 = new MyHeap<>();
+        ICountSemaphore<Integer, Pair<Integer, ArrayList<Integer>>> semaphore2 = new CountSemaphore<>();
         IStmt program2 = new CompoundStatement(
                 new VariableDeclarationStatement("a", new BooleanType()),
                 new CompoundStatement(
@@ -118,7 +122,7 @@ public class Interpreter {
                                             )
                                         )
         );
-        ProgramState prg2 = new ProgramState(exeStack2,symTable2,out2,program2, fileTable2, heap2);
+        ProgramState prg2 = new ProgramState(exeStack2,symTable2,out2,program2, fileTable2, heap2,semaphore2);
         IRepository repository2 = new Repository("log2.txt");
         Controller controller2 = new Controller(repository2);
         controller2.addProgram(prg2);
@@ -129,6 +133,7 @@ public class Interpreter {
         IList<IValue> out3 = new MyList<>();
         IDictionary<StringValue, BufferedReader> fileTable3 = new MyDictionary<>();
         IHeap<Integer, IValue> heap3 = new MyHeap<>();
+        ICountSemaphore<Integer, Pair<Integer, ArrayList<Integer>>> semaphore3 = new CountSemaphore<>();
         IStmt program3 = new CompoundStatement(
                 new VariableDeclarationStatement("varf", new StringType()),
                 new CompoundStatement(
@@ -148,7 +153,7 @@ public class Interpreter {
                                                                 new PrintStatement(new ValueExpression(new StringValue("a less than 10"))),
                                                                 new PrintStatement(new ValueExpression(new StringValue("a greater than 10")))),
                                                         new CloseRFileStatement(new VariableExpression("varf"))))))));
-        ProgramState prg3 = new ProgramState(exeStack3,symTable3,out3,program3, fileTable3, heap3);
+        ProgramState prg3 = new ProgramState(exeStack3,symTable3,out3,program3, fileTable3, heap3,semaphore3);
         IRepository repository3 = new Repository("log3.txt");
         Controller controller3 = new Controller(repository3);
         controller3.addProgram(prg3);
@@ -159,6 +164,7 @@ public class Interpreter {
         IDictionary<StringValue, BufferedReader> fileTable4 = new MyDictionary<>();
         IHeap<Integer, IValue> heap4 = new MyHeap<>();
         IList<IValue> out4 = new MyList<>();
+        ICountSemaphore<Integer, Pair<Integer, ArrayList<Integer>>> semaphore4 = new CountSemaphore<>();
 
 
         IStmt program4 = new CompoundStatement(
@@ -179,17 +185,19 @@ public class Interpreter {
                                 )
                         )
                 ));
-        ProgramState prg4 = new ProgramState(exeStack4,symbolTable4,out4,program4, fileTable4, heap4);
+        ProgramState prg4 = new ProgramState(exeStack4,symbolTable4,out4,program4, fileTable4, heap4,semaphore4);
         IRepository repository4 = new Repository("log4.txt");
         Controller controller4 = new Controller(repository4);
         controller4.addProgram(prg4);
-
+        ICountSemaphore<Integer, Pair<Integer, ArrayList<Integer>>> semaphore5 = new CountSemaphore<>();
 
         IStack<IStmt> exeStack5 = new MyStack<>();
         IDictionary<String, IValue> symbolTable5 = new MyDictionary<>();
         IDictionary<StringValue, BufferedReader> fileTable5 = new MyDictionary<>();
         IHeap<Integer, IValue> heap5 = new MyHeap<>();
         IList<IValue> out5 = new MyList<>();
+
+
         ////Ref int v;new(v,20);Ref Ref int a; new(a,v); writeheap(v,30);print(rH(rH(a)))
         IStmt program5 = new CompoundStatement(
                 new VariableDeclarationStatement("v", new ReferenceType(new IntegerType())),
@@ -326,7 +334,7 @@ public class Interpreter {
         menu.addCommand(new RunExample("6", program6.toString(), controller6));
         menu.addCommand(new RunExample("7", program7.toString(), controller7));
         menu.addCommand(new RunExample("8", program8.toString(), controller8));
-        menu.show();
+        menu.show();*/
         /*allPrograms.add(program1);
         allPrograms.add(program2);
         allPrograms.add(program3);
